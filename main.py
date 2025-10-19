@@ -1,9 +1,21 @@
-import logging
+import logging.config
 
-logging.getLogger("my_app")
+# logging.debug() # BAD because it uses the root logger
+logging.getLogger("my_app") # GOOD because it uses one of your loggers
+
+logging_config = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "filters": {},
+    "formatters": {},
+    "handlers": {},
+    "loggers": {},
+}
 
 def main():
-    logging.basicConfig(level=logging.DEBUG)
+    # logging.basicConfig(level=logging.DEBUG)
+    logging.config.dictConfig(config=logging_config) # Use dictConfig()
+
     logging.debug("debug message")
     logging.info("info message")
     logging.warning("warning message")
